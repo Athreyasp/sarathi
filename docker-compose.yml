@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: opspilot
+      POSTGRES_PASSWORD: opspilot_password
+      POSTGRES_DB: opspilot_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U opspilot -d opspilot_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://opspilot:opspilot_password@db:5432/opspilot_db
+      - LLM_API_KEY=${LLM_API_KEY:-}
+      - SIMULATOR_URL=http://simulator:8001
+      - EXECUTION_ENABLED=true
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+
+  simulator:
+    build:
+      context: ./simulator
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./simulator:/app
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+volumes:
+  postgres_data:
