@@ -14,11 +14,12 @@
   <b>Sarathi</b> (Sanskrit for <i>The Charioteer / Trusted Guide</i>) is a safety-first autonomous AI incident response platform built for modern <b>Site Reliability Engineering (SRE)</b> and <b>Security Operations Center (SOC)</b> teams.
 </p>
 
-[Key Features](#-key-features) • [Architecture](#-system-architecture) • [UI Overview](#-console-views) • [Quick Start](#-getting-started) • [Live Demo](#-live-demo-script) • [Safety Guarantee](#-safety-first-philosophy)
+[Key Features](#-key-features) • [Architecture](#-system-architecture) • [UI Overview](#-console-views) • [Quick Start](#-getting-started) • [API & Playbooks](#-api--integration-specifications) • [Safety Guarantee](#-safety-first-philosophy)
 
 ---
 
 </div>
+
 
 ## 🛑 The Core Problem
 
@@ -159,23 +160,45 @@ npm run dev
 
 ---
 
-## 🎬 Live Demo Script
+## 🔌 API & Integration Specifications
 
-Follow this step-by-step walkthrough during presentations or evaluation:
+Sarathi exposes a REST API for SIEM event ingestion, automated AI triage, and cryptographic countermeasure authorization.
 
-1. **Launch Console:** Navigate to `http://localhost:5173` to see the **Team Hashiras** startup preloader.
-2. **Simulate Production Threat:** Click **Simulate Threat** in the top header.
-   - The status changes to `System Compromised`.
-   - The real-time telemetry chart spikes to **47% HTTP 500 error rate**.
-   - Critical database handshake errors flood the log stream.
-3. **Deploy AI Investigator:** Click **Deploy AI Investigator** in the Copilot panel.
-   - Watch the agent ingest telemetry and correlate distributed logs.
-   - The LLM diagnostic engine outputs: `DB_SSL_MODE Configuration Drift (94% Confidence)`.
-4. **Authorize Countermeasure:** Review the formulated runbook and click **Authorize Exact Countermeasure**.
-5. **Observe Autonomous Recovery:**
-   - The deterministic engine applies `RB-01: Rollback Payload v1.0`.
-   - The 3-pass verification loop validates latency stabilization (<100ms).
-   - The **Post-Mortem Incident Report** generates automatically.
+### Key REST Endpoints
+
+| Endpoint | Method | Description | Payload / Response |
+| :--- | :--- | :--- | :--- |
+| `/api/simulator/state` | `GET` | Retrieves real-time microservice health, P95 latency, and active payload version. | `{ "error_rate": 0.002, "p95_latency_ms": 68, "active_version": "v1.0" }` |
+| `/api/simulator/inject-outage` | `POST` | Triggers a simulated production anomaly (DB SSL handshake mismatch, HTTP 500 spike). | `{ "status": "outage_injected", "active_version": "v1.1" }` |
+| `/api/incidents/` | `POST` | Autonomously creates an incident ticket upon telemetry SLA breach. | `{ "incident_id": "INC-2026-001", "severity": "CRITICAL" }` |
+| `/api/incidents/{id}/investigate` | `POST` | Triggers the LLM heuristics engine to ingest logs and generate a root cause hypothesis. | `{ "diagnosis": { "primary_hypothesis": { "score": 0.94 } } }` |
+| `/api/actions/{id}/approve` | `POST` | Validates human commander signature and verifies SHA-256 payload hash. | `{ "status": "approved", "action_hash": "8f9a2b4_sha256" }` |
+| `/api/actions/{id}/execute` | `POST` | Executes deterministic runbook and initiates 3-pass telemetry verification. | `{ "status": "mitigated", "verification": "3_pass_passed" }` |
+
+---
+
+## 📜 Automated Incident Response Playbooks
+
+Sarathi maintains a repository of pre-compiled, deterministic runbooks. Each runbook is cryptographically signed with a SHA-256 hash to prevent unauthorized payload tampering.
+
+```json
+{
+  "runbook_id": "RB-01",
+  "action_type": "rollback_deployment",
+  "target_service": "payment-api",
+  "parameters": {
+    "from_revision": "v1.1",
+    "to_revision": "v1.0",
+    "graceful_shutdown_seconds": 15
+  },
+  "safety_policy": {
+    "require_human_auth": true,
+    "sha256_hash": "8f9a2b47c0e12d8a9f3b890a8e7f12a34b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e",
+    "verification_strategy": "3_pass_telemetry_probe"
+  }
+}
+```
+
 
 ---
 
