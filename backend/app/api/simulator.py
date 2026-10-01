@@ -2,14 +2,16 @@ from fastapi import APIRouter
 import httpx
 import logging
 
+import os
+
 router = APIRouter()
-SIMULATOR_URL = "http://127.0.0.1:8001/api/simulator"
+SIMULATOR_URL = os.getenv("SIMULATOR_URL", "http://127.0.0.1:8001").rstrip("/")
 
 @router.get("/state")
 async def get_state():
     try:
         async with httpx.AsyncClient(timeout=3.0) as client:
-            response = await client.get(f"{SIMULATOR_URL}/state")
+            response = await client.get(f"{SIMULATOR_URL}/api/simulator/state")
             return response.json()
     except Exception as e:
         logging.warning(f"Simulator service connection error: {e}")
@@ -25,7 +27,7 @@ async def get_state():
 async def inject_outage():
     try:
         async with httpx.AsyncClient(timeout=3.0) as client:
-            response = await client.post(f"{SIMULATOR_URL}/inject-outage")
+            response = await client.post(f"{SIMULATOR_URL}/api/simulator/inject-outage")
             return response.json()
     except Exception as e:
         logging.warning(f"Simulator inject outage error: {e}")

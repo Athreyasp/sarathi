@@ -2,7 +2,7 @@ import os
 import httpx
 from app.services.policy import verify_approval
 
-SIMULATOR_URL = os.getenv("SIMULATOR_URL", "http://localhost:8001")
+SIMULATOR_URL = os.getenv("SIMULATOR_URL", "http://localhost:8001").rstrip("/")
 
 class ActionExecutor:
     async def rollback_deployment(self, target: dict):
