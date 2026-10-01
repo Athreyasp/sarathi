@@ -27,7 +27,8 @@ def run_llm_diagnosis(evidence_list: list) -> DiagnosisOutput:
                 "title": "Database outage",
                 "score": 0.06,
                 "supporting_evidence_ids": [],
-                "contradicting_evidence_ids": ["E-003"]
+                "contradicting_evidence_ids": ["E-003"],
+                "reasoning": "Database metrics show downstream latency anomalies."
             }
         ],
         next_check="Compare deployment v1.1 database settings with v1.0"

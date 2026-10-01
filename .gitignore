@@ -22,8 +22,10 @@ env/
 .DS_Store
 Thumbs.db
 
-# IDEs
+# IDEs & System
 .idea/
 .vscode/
 *.swp
 *.swo
+Microsoft/
+

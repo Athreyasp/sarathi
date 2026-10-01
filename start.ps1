@@ -1,28 +1,37 @@
-Write-Host "Starting OpsPilot Setup (No Docker)..."
+Write-Host "Starting Sarathi Autonomous SIEM Setup (No Docker)..."
+
+
+# Ensure Python and Node.js are in PATH
+$env:PATH = "C:\Users\athre\AppData\Local\Programs\Python\Python313;C:\Users\athre\AppData\Local\Programs\Python\Python313\Scripts;C:\Program Files\nodejs;C:\Users\athre\AppData\Roaming\npm;" + $env:PATH
 
 # 1. Setup and Start Simulator
 Write-Host "Setting up Simulator environment..."
-Set-Location -Path "d:\Parallax\opspilot\simulator"
+Set-Location -Path "$PSScriptRoot\simulator"
 if (-not (Test-Path "venv")) {
     python -m venv venv
 }
-.\venv\Scripts\python -m pip install -r requirements.txt
-Start-Process powershell -ArgumentList "-NoExit", "-Command", "& '.\venv\Scripts\uvicorn.exe' main:app --port 8001 --reload"
+if (Test-Path ".\venv\Scripts\python.exe") {
+    .\venv\Scripts\python.exe -m pip install -r requirements.txt
+}
+Start-Process powershell -ArgumentList "-NoExit", "-Command", "Set-Location '$PSScriptRoot\simulator'; & '.\venv\Scripts\uvicorn.exe' main:app --port 8001 --reload"
 
 # 2. Setup and Start Backend
 Write-Host "Setting up Backend environment..."
-Set-Location -Path "d:\Parallax\opspilot\backend"
+Set-Location -Path "$PSScriptRoot\backend"
 if (-not (Test-Path "venv")) {
     python -m venv venv
 }
-.\venv\Scripts\python -m pip install -r requirements.txt
-Start-Process powershell -ArgumentList "-NoExit", "-Command", "& '.\venv\Scripts\uvicorn.exe' app.main:app --port 8000 --reload"
+if (Test-Path ".\venv\Scripts\python.exe") {
+    .\venv\Scripts\python.exe -m pip install -r requirements.txt
+}
+Start-Process powershell -ArgumentList "-NoExit", "-Command", "Set-Location '$PSScriptRoot\backend'; & '.\venv\Scripts\uvicorn.exe' app.main:app --port 8000 --reload"
+
 
 # 3. Setup and Start Frontend
 Write-Host "Setting up Frontend environment..."
-Set-Location -Path "d:\Parallax\opspilot\frontend"
+Set-Location -Path "$PSScriptRoot\frontend"
 npm install
-Start-Process powershell -ArgumentList "-NoExit", "-Command", "npm run dev"
+Start-Process powershell -ArgumentList "-NoExit", "-Command", "Set-Location '$PSScriptRoot\frontend'; npm run dev"
 
 Write-Host "All services have been started in separate windows!"
 Write-Host "Frontend is running at http://localhost:5173"

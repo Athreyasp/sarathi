@@ -1,10 +1,10 @@
-# OpsPilot // Autonomous SIEM & Incident Response Agent
+# Sarathi // Autonomous SIEM & Incident Response Copilot
 
-**OpsPilot** (formerly *Sarathi*) is a safety-first AI incident-response platform built for modern Site Reliability Engineering (SRE) and Security Operations Center (SOC) teams. 
+**Sarathi** (सारथी — *The AI Charioteer & Pilot for Security & SRE Operations*) is a safety-first autonomous incident-response platform built for modern Site Reliability Engineering (SRE) and Security Operations Center (SOC) teams. 
 
 It autonomously correlates telemetry, investigates root causes, and proposes cryptographic-hashed countermeasure runbooks—**never executing risky actions without explicit human authorization.**
 
-![OpsPilot Console UI](https://img.shields.io/badge/UI-SentinelOne_Inspired-00e5ff?style=for-the-badge)
+![Sarathi Console UI](https://img.shields.io/badge/UI-SentinelOne_Inspired-00e5ff?style=for-the-badge)
 ![Tech Stack](https://img.shields.io/badge/Stack-React_|_FastAPI_|_Python-3B82F6?style=for-the-badge)
 
 ## 🛑 The Problem
@@ -13,8 +13,9 @@ When a software application or payment service suddenly degrades, engineers manu
 * **Risky Fixes:** Blindly rolling back a deployment might corrupt an incompatible database migration.
 * **Unsafe AI:** Allowing a raw LLM to execute shell commands during an outage is a massive security risk.
 
-## 🚀 The OpsPilot Solution
-OpsPilot solves this by separating **AI Reasoning** from **Deterministic Execution**. 
+## 🚀 The Sarathi Solution
+Sarathi solves this by separating **AI Reasoning** from **Deterministic Execution**. 
+
 
 1. **Investigates:** The AI agent autonomously ingests distributed data (ElasticSearch logs, Prometheus metrics, ArgoCD pipeline drift, past incidents).
 2. **Diagnoses:** Utilizes LLM heuristics to isolate the root cause and output a confidence score.

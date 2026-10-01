@@ -7,7 +7,7 @@ class Hypothesis(BaseModel):
     score: float
     supporting_evidence_ids: List[str]
     contradicting_evidence_ids: List[str]
-    reasoning: str
+    reasoning: Optional[str] = ""
 
 class DiagnosisOutput(BaseModel):
     primary_hypothesis: Hypothesis
