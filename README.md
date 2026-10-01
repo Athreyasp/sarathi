@@ -1,60 +1,206 @@
-# Sarathi // Autonomous SIEM & Incident Response Copilot
+<div align="center">
 
-**Sarathi** (सारथी — *The AI Charioteer & Pilot for Security & SRE Operations*) is a safety-first autonomous incident-response platform built for modern Site Reliability Engineering (SRE) and Security Operations Center (SOC) teams. 
+# 🛡️ SARATHI (सारथी)
+### Autonomous SIEM & SRE Incident Response Copilot
+**Engineered by Team Hashiras**
 
-It autonomously correlates telemetry, investigates root causes, and proposes cryptographic-hashed countermeasure runbooks—**never executing risky actions without explicit human authorization.**
+[![React](https://img.shields.io/badge/Frontend-React%2019%20%7C%20TypeScript%20%7C%20Vite-00f0ff?style=for-the-badge&logo=react)](https://react.dev/)
+[![FastAPI](https://img.shields.io/badge/Backend-FastAPI%20%7C%20Python%203.11+-00ff9d?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![Security](https://img.shields.io/badge/Policy-SHA--256%20Cryptographic%20Gating-ff2a5f?style=for-the-badge&logo=security)](https://github.com/Athreyasp/sarathi)
+[![UI Style](https://img.shields.io/badge/Theme-Google%20Sec--Ops%20%7C%20SentinelOne-b052ff?style=for-the-badge)](https://github.com/Athreyasp/sarathi)
+[![License](https://img.shields.io/badge/License-MIT-3b82f6?style=for-the-badge)](LICENSE)
 
-![Sarathi Console UI](https://img.shields.io/badge/UI-SentinelOne_Inspired-00e5ff?style=for-the-badge)
-![Tech Stack](https://img.shields.io/badge/Stack-React_|_FastAPI_|_Python-3B82F6?style=for-the-badge)
+<p align="center">
+  <b>Sarathi</b> (Sanskrit for <i>The Charioteer / Trusted Guide</i>) is a safety-first autonomous AI incident response platform built for modern <b>Site Reliability Engineering (SRE)</b> and <b>Security Operations Center (SOC)</b> teams.
+</p>
 
-## 🛑 The Problem
-When a software application or payment service suddenly degrades, engineers manually hunt through distributed logs, metrics, and deployment pipelines.
-* **Slow Diagnosis:** Investigating across scattered tools wastes critical outage time.
-* **Risky Fixes:** Blindly rolling back a deployment might corrupt an incompatible database migration.
-* **Unsafe AI:** Allowing a raw LLM to execute shell commands during an outage is a massive security risk.
+[Key Features](#-key-features) • [Architecture](#-system-architecture) • [UI Overview](#-console-views) • [Quick Start](#-getting-started) • [Live Demo](#-live-demo-script) • [Safety Guarantee](#-safety-first-philosophy)
 
-## 🚀 The Sarathi Solution
-Sarathi solves this by separating **AI Reasoning** from **Deterministic Execution**. 
+---
 
+</div>
 
-1. **Investigates:** The AI agent autonomously ingests distributed data (ElasticSearch logs, Prometheus metrics, ArgoCD pipeline drift, past incidents).
-2. **Diagnoses:** Utilizes LLM heuristics to isolate the root cause and output a confidence score.
-3. **Proposes:** Maps the anomaly to a pre-authorized runbook, generating a strict SHA-256 hash of the target payload.
-4. **Authorizes:** Halts and demands a human SOC Commander to authorize the exact action.
-5. **Executes & Verifies:** A deterministic execution engine applies the fix, runs a 3-pass verification loop, and generates a post-mortem report.
+## 🛑 The Core Problem
 
-## 🛠 Tech Stack
-* **Frontend:** React 18, Vite, TypeScript, Recharts, Lucide-React (SentinelOne Dark Theme)
-* **Backend:** Python 3.11, FastAPI, Pydantic, SQLAlchemy
-* **Execution Layer:** Policy Engine with SHA-256 validation (No LLM shell access)
+When critical microservices or payment gateways degrade in production:
+* **Manual Triage Latency:** Engineers lose critical minutes manually correlating telemetry across fragmented dashboards (Grafana, ElasticSearch, ArgoCD).
+* **High-Risk Remediation:** Blind rollbacks often trigger cascading failures or corrupt database migration schemas.
+* **Unconstrained AI Risks:** Granting raw LLM agents direct shell/bash execution permissions in production environments introduces severe security and operational hazards.
 
-## 🏃‍♂️ How to Run Locally (No Docker Required)
+---
 
-This project is built to run natively. You can start the entire stack using the provided PowerShell automation script.
+## ⚡ The Sarathi Solution
 
-1. Clone the repository and navigate into the folder:
-```bash
-cd opspilot
+**Sarathi** resolves this crisis by establishing a strict boundary between **AI Reasoning** and **Deterministic Execution**:
+
+1. **Ingest & Correlate:** Autonomously streams and aggregates distributed logs, Prometheus metrics, and deployment revisions in real-time.
+2. **Diagnose with Confidence:** Leverages fine-tuned LLM heuristics to isolate the exact root cause (e.g., config drift, SSL handshake errors) and outputs a quantitative confidence score.
+3. **Formulate Cryptographic Runbooks:** Maps identified anomalies to pre-compiled deterministic runbooks, generating a strict **SHA-256 hash payload**.
+4. **Human-in-the-Loop Gating:** Halts execution for critical mutations and demands explicit authorization from a human SOC commander.
+5. **Execute & 3-Pass Verify:** Applies the countermeasure through deterministic APIs, continuously monitors telemetry recovery for 3 consecutive intervals, and generates an automated Post-Mortem report.
+
+---
+
+## 🏗️ System Architecture
+
+```mermaid
+flowchart TD
+    subgraph Ingestion ["1. Multi-Modal Ingestion Layer"]
+        A[Prometheus Metrics] --> D[Sarathi Telemetry Stream]
+        B[ElasticSearch Logs] --> D
+        C[ArgoCD GitOps Drift] --> D
+    end
+
+    subgraph Reasoning ["2. Autonomous AI Reasoning Engine"]
+        D --> E[LLM Anomaly Heuristics]
+        E --> F[Root Cause Hypothesis Matrix]
+        F --> G[Runbook Selection & SHA-256 Hash]
+    end
+
+    subgraph SecurityGate ["3. Cryptographic Safety Gate"]
+        G --> H{Risk Vector Check}
+        H -->|High / Critical| I[Human SOC Commander Approval]
+        H -->|Low Risk| J[Autonomous Fast-Track]
+        I -->|Authorized Signature| K[Deterministic Policy Engine]
+        J --> K
+    end
+
+    subgraph Execution ["4. Execution & Verification Loop"]
+        K --> L[Target Microservice Action]
+        L --> M[3-Pass Telemetry Verification]
+        M -->|Nominal SLA Restored| N[Automated Post-Mortem Report]
+    end
 ```
 
-2. Run the automated boot sequence:
+---
+
+## 🌟 Key Features
+
+* 🚀 **Fast Cyber Preloader:** Cinematic startup sequence powered by **Team Hashiras** with instant system health checks.
+* 🧭 **Google Cloud / Material 3 Navigation:** Collapsible navigation drawer with active rounded pill states and status indicators.
+* 📊 **Live Telemetry & Anomaly Matrix:** Real-time error rate tracking, P95 latency monitoring, and interactive Area charts.
+* 📜 **Full-Screen SIEM Log Terminal:** Searchable event stream with level filtering (`CRITICAL`, `WARN`, `INFO`) and stream pause/resume.
+* 🤖 **Autonomous SOC Copilot Console:** Interactive reasoning graph displaying ingestion, hypothesis scoring, and post-mortem generation.
+* 🔐 **SHA-256 Runbook Registry:** Library of pre-compiled safety runbooks with a live JSON schema inspector.
+* 🌐 **Fleet Infrastructure Topology:** Service node health inspection, container specifications, and microservice dependency mesh.
+
+---
+
+## 🖥️ Console Views
+
+| View | Purpose | Key Capabilities |
+| :--- | :--- | :--- |
+| **SOC Overview** | Main Triage Hub | 3-panel split view with live stream, error telemetry, and the AI investigator widget. |
+| **Telemetry Matrix** | Deep Health Analytics | P95 latency distributions, HTTP 500 spike graphs, and PostgreSQL connection pool gauges. |
+| **Live Log Stream** | Log Exploration | Real-time log streamer with sub-second event rendering and keyword search. |
+| **AI Investigator** | Copilot Command Center | Full hypothesis breakdown, multi-modal ingestion status, and approval gating. |
+| **Security Runbooks** | Cryptographic Library | Inspect JSON schemas for `RB-01` (Rollback), `RB-02` (DB SSL Sync), `RB-03` (Circuit Breaker), and `RB-04` (Vault Secrets). |
+| **Fleet Topology** | Microservice Mesh | Live Pod specifications, TLS status, CPU/Memory telemetry, and downstream dependency maps. |
+
+---
+
+## 🏃‍♂️ Getting Started
+
+### Prerequisites
+* **Python 3.10+**
+* **Node.js 18+** & **npm**
+* **PowerShell** (Windows) or **Bash** (Linux/macOS)
+
+---
+
+### Option 1: Automated 1-Click Startup (Recommended)
+
+Run the automated boot sequence from the root directory:
+
 ```powershell
 .\start.ps1
 ```
-*(If PowerShell blocks the script, run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` first).*
 
-The script will automatically provision Python virtual environments, install dependencies, and launch:
-* **Frontend UI:** `http://localhost:5173`
-* **Backend API:** `http://localhost:8000/docs`
-* **Simulator API:** `http://localhost:8001/docs`
+> **Note:** If PowerShell blocks script execution, run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` first.
 
-## 🎬 Hackathon Demo Script
-1. Navigate to the frontend UI at `http://localhost:5173`.
-2. Click **Simulate Threat** to trigger the anomaly (watch the telemetry chart spike and error logs flood the terminal).
-3. Click **Deploy AI Investigator** to trigger the autonomous correlation engine.
-4. Review the AI's 94% confidence diagnosis and the proposed rollback strategy.
-5. Click **Authorize Exact Countermeasure** to execute the fix.
-6. Watch the telemetry stabilize and the **Post-Mortem Report** generate automatically.
+The script automatically sets up virtual environments, installs dependencies, and launches all 3 services:
+* 🌐 **Frontend UI:** `http://localhost:5173`
+* ⚙️ **Backend SIEM API:** `http://localhost:8000/docs`
+* 🧪 **Simulator Microservice:** `http://localhost:8001/docs`
 
 ---
-*Built for Hackathon 2026 - Domain 2 (Technology & Cybersecurity)*
+
+### Option 2: Manual Step-by-Step Launch
+
+<details>
+<summary><b>Click to expand manual setup instructions</b></summary>
+
+#### 1. Start the Microservice Simulator
+```bash
+cd simulator
+python -m venv venv
+.\venv\Scripts\activate      # On Linux/macOS: source venv/bin/activate
+pip install -r requirements.txt
+uvicorn main:app --port 8001 --reload
+```
+
+#### 2. Start the Sarathi Backend API
+```bash
+cd backend
+python -m venv venv
+.\venv\Scripts\activate      # On Linux/macOS: source venv/bin/activate
+pip install -r requirements.txt
+uvicorn app.main:app --port 8000 --reload
+```
+
+#### 3. Start the React Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+</details>
+
+---
+
+## 🎬 Live Demo Script
+
+Follow this step-by-step walkthrough during presentations or evaluation:
+
+1. **Launch Console:** Navigate to `http://localhost:5173` to see the **Team Hashiras** startup preloader.
+2. **Simulate Production Threat:** Click **Simulate Threat** in the top header.
+   - The status changes to `System Compromised`.
+   - The real-time telemetry chart spikes to **47% HTTP 500 error rate**.
+   - Critical database handshake errors flood the log stream.
+3. **Deploy AI Investigator:** Click **Deploy AI Investigator** in the Copilot panel.
+   - Watch the agent ingest telemetry and correlate distributed logs.
+   - The LLM diagnostic engine outputs: `DB_SSL_MODE Configuration Drift (94% Confidence)`.
+4. **Authorize Countermeasure:** Review the formulated runbook and click **Authorize Exact Countermeasure**.
+5. **Observe Autonomous Recovery:**
+   - The deterministic engine applies `RB-01: Rollback Payload v1.0`.
+   - The 3-pass verification loop validates latency stabilization (<100ms).
+   - The **Post-Mortem Incident Report** generates automatically.
+
+---
+
+## 🔒 Safety-First Philosophy
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                   SARATHI SAFETY GUARANTEE                  │
+├─────────────────────────────────────────────────────────────┤
+│  1. NO RAW SHELL EXECUTION (Zero LLM subprocess spawn)      │
+│  2. CRYPTOGRAPHIC SIGNATURES (SHA-256 payload validation)   │
+│  3. MANDATORY HUMAN GATING (Explicit operator authorization)│
+│  4. DETERMINISTIC 3-PASS VERIFICATION (Automated SLA proof) │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 👥 Built by Team Hashiras
+
+* **Athreya S P** — *Lead Architecture & Full-Stack Engineering*
+* **Team Hashiras** — *Autonomous SRE & AI Cyber-Defense Innovations*
+
+---
+
+<div align="center">
+  <sub>Built for Google Cloud Hackathon 2026 // Domain: Technology & Cybersecurity</sub>
+</div>
