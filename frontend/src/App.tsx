@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { 
-  Shield, Activity, Terminal, AlertTriangle, 
+  Activity, Terminal, AlertTriangle, 
   Cpu, Lock, CheckCircle, Search, Crosshair,
   Server, Database, GitBranch, Radio, Zap,
-  Layers, ArrowUpRight, BarChart3, RefreshCw,
-  FileText, ShieldCheck, HardDrive, Sliders,
+  ArrowUpRight, BarChart3, RefreshCw,
+  FileText, ShieldCheck, Sliders,
   ChevronLeft, ChevronRight, LayoutDashboard
 } from 'lucide-react';
 
