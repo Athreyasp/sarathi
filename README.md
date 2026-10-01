@@ -219,7 +219,6 @@ Sarathi maintains a repository of pre-compiled, deterministic runbooks. Each run
 
 ## 👥 Built by Team Hashiras
 
-* **Athreya S P** — *Lead Architecture & Full-Stack Engineering*
 * **Team Hashiras** — *Autonomous SRE & AI Cyber-Defense Innovations*
 
 ---
